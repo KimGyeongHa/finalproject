@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="BCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
+	<bean id="passwordEncoder" class="bb.project.sequrity.MemberPasswordEncoder"></bean>
+
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	<property name="url" value="jdbc:oracle:thin:@projectbb.cn9hfafbttev.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
+	<property name="username" value="admin"></property>
+	<property name="password" value="tiger1234"></property>
+</bean>
+
+
+
+	<security:http auto-config="true" use-expressions="true">
+		
+		<security:intercept-url pattern="/addmember"
+			access="permitAll()" />
+		<security:intercept-url pattern="/main"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/trinfotest" 
+			access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/spring"
+			access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/CsForm"
+			access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/CsinsertForm"
+			access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/Csmodify2"
+			access="hasRole('ROLE_MEMBER')" /> 
+			
+			
+			<!--로그인 설정??-->
+		<security:form-login login-page="/Login" />
+		<security:form-login login-processing-url="/main" />
+	
+		 
+		
+	
+	<!-- 로그아웃페이지로 이동 -->
+	<security:logout delete-cookies="JSESSIONID" invalidate-session="true"
+		logout-url="/Logout" logout-success-url="/main" />
+	
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="SELECT id , pw, enabled from member where id=? "
+			authorities-by-username-query="SELECT id, autority from member_auth where id=?"
+			/>
+			
+			<security:password-encoder ref="BCryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

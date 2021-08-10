@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="bb.project.dto.MemberDTO" alias="mdto"/>
+		<typeAlias type="bb.project.dto.MemberDetailDTO" alias="mdtod"/>
+		<typeAlias type="bb.project.dto.MemberAUTHDTO" alias="authdto"/>
+		<typeAlias type="bb.project.dto.TrinfoDTO" alias="trdto"/>
+		<typeAlias type="bb.project.dto.TrinfoDetailDTO" alias="trdedto"/>
+		<typeAlias type="bb.project.dto.MemCommDTO" alias="mcdto"/>
+		<typeAlias type="bb.project.dto.CsDTO" alias="cdto"/>
+		<typeAlias type="bb.project.dto.PageNum" alias="pgn"/>
+  	</typeAliases>
+  </configuration>
