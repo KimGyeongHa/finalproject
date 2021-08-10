@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bb.project.dao.CsDAO">
+
+	<select id="getData" resultType="int">
+		SELECT count(*)
+		FROM CS
+	</select>
+
+	<select id="selectCs" parameterType="pgn" resultType="cdto">
+		SELECT CSNO, MNO, CSTITLE, CSCONTENTS, CSREPDATE, CSIMG
+		FROM (SELECT ROWNUM RN, CSNO, MNO, CSTITLE, CSCONTENTS, CSREPDATE, CSIMG
+		FROM (SELECT CSNO, MNO, CSTITLE, CSCONTENTS, CSREPDATE, CSIMG
+		FROM CS
+		ORDER BY CSNO desc)
+		WHERE ROWNUM &lt;= ${EndNum})
+		WHERE RN &gt;= ${StartNum}
+	</select>
+
+
+	<insert id="insertOne" parameterType="cdto">
+		INSERT INTO cs
+		VALUES (MEMBER_CS_CSNO_SEQ.NEXTVAL, #{mno}, #{cstitle},
+		#{cscontents},sysdate,#{csimg})
+	</insert>
+
+
+	<select id="selectOne" parameterType="int" resultType="cdto">
+		SELECT csno, mno,cstitle,cscontents, csrepdate,csimg
+		FROM cs
+		WHERE csno=#{csno}
+	</select>
+
+	<update id="updateOne" parameterType="cdto">
+		UPDATE cs
+		SET cstitle = #{cstitle} , cscontents = #{cscontents}
+		WHERE csno = #{csno}
+	</update>
+
+	<delete id="deleteOne" parameterType="int">
+		DELETE cs
+		WHERE csno=#{csno}
+	</delete>
+
+
+</mapper> 
+  

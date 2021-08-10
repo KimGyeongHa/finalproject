@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bb.project.dao.TrinfoDAO">
+
+
+	<insert id="insertOne" parameterType="trdto">
+		INSERT INTO trinfo
+		VALUES (TRINFO_BNO_SEQ.NEXTVAL,#{type},#{trtitle},#{trimg},#{mno},0,#{id})
+	</insert>
+	
+	<select id="selectOne" parameterType="String" resultType="trdto">
+		SELECT bno,type,trtitle, trimg, mno, hits, id
+		FROM trinfo
+		WHERE id=#{id}
+	</select>
+
+	<update id="updateOne" parameterType="trdto">
+		UPDATE trinfo
+		SET trtitle=#{trtitle}
+		WHERE bno=#{bno}
+	</update>
+
+	<delete id="deleteOne">
+		DELETE trinfo
+		WHERE bno=#{bno}
+	</delete>
+
+	<update id="updatehits" parameterType="trdto">
+		UPDATE trinfo
+		SET hits=#{hits}
+		WHERE bno=#{bno}
+	</update>
+
+
+	<select id="selectAl" parameterType="int" resultType="trdto">
+		SELECT BNO, TYPE, TRTITLE, TRIMG, MNO, HITS, ID
+			FROM (SELECT ROWNUM RN, BNO, TYPE, TRTITLE, TRIMG, MNO ,HITS, ID
+				FROM (SELECT BNO, TYPE, TRTITLE, TRIMG, MNO, HITS, ID
+					FROM trinfo
+						ORDER BY BNO DESC)
+				WHERE type = ${type})
+	</select>
+
+
+</mapper>

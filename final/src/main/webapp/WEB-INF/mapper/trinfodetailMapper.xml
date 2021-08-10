@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="bb.project.dao.TrinfoDetailDAO">
+  
+  <insert id="insertOne" parameterType="trdedto">
+  	INSERT INTO trinfodetail
+  	VALUES (TRINFO_DETAIL_BNO_SEQ.NEXTVAL, #{cost},#{park},#{inqu}, #{conv}, #{holi}, #{etc}, #{loc}, #{adrs},#{trdetail},#{hp},#{time},'')
+  </insert>
+  
+  <update id="updateOne" parameterType="trdedto">
+  	UPDATE trinfodetail
+  	SET cost = #{cost} , park = #{park}, inqu = #{inqu} ,conv= #{conv} ,holi = #{holi}, etc = #{etc}, loc= #{loc}, adrs= #{adrs}, trdetail = #{trdetail}
+  	WHERE bno = #{bno}
+  </update>
+  
+  
+  <delete id="deleteOne" parameterType="int">
+  	DELETE trinfodetail
+  	WHERE bno = #{bno}
+  </delete>
+  
+  <select id="selectOne" parameterType="int" resultType="trdedto">
+  	SELECT bno, cost, park, inqu, conv, holi, etc, loc, adrs, trdetail , hp, time, trdeimg
+  	FROM trinfodetail
+  	WHERE bno = #{bno}
+  </select>
+  
+  
+  </mapper>

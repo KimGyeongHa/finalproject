@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+ <mapper namespace="bb.project.dao.MemberDAO">
+	
+	
+	<select id="selectOne" parameterType="String" resultType="mdto">
+		SELECT mno, id, pw , name, birth ,pn, nickname, enabled 
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	
+	<insert id="insertOne" parameterType="mdto">
+		INSERT INTO member
+		VALUES(MEMBER_ADD_SEQ.NEXTVAL, #{id},#{pw},#{name},#{birth},#{pn} ,#{nickname},'1')
+	</insert> 
+ 	
+ 	<update id="updateOne" parameterType="mdto">
+ 		UPDATE member
+ 		SET pw=#{pw},name=#{name},pn=#{pn},#{nickname}
+ 		WHERE id=#{id}
+ 	</update>
+ 
+ 	<delete id="deleteOne" parameterType="mdto">
+ 		DELETE member
+ 		WHERE id=#{id}
+ 	
+ 	</delete>
+ 
+ </mapper> 

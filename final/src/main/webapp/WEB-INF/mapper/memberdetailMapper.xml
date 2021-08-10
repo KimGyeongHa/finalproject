@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="bb.project.dao.MemberDetailDAO">
+
+	<insert id="insertOne" parameterType="mdtod">
+ 		INSERT INTO memberdetail
+ 		VALUES (MEMBER_DETAIL_ADD_SEQ.NEXTVAL,#{addrs},#{email},#{gender},#{marr},#{chi},#{emaildetail1},#{emaildetail2})
+ 	
+ 	</insert>
+ 	
+ 	<update id="updateOne" parameterType="mdtod">
+ 		UPDATE memberdetail
+ 		SET addrs=#{addrs},email=#{email}
+ 		WHERE mno=#{mno}
+ 	</update>
+ </mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="bb.project.dao.MemCommDAO">
+  
+  <insert id="insertOne" parameterType="mcdto">
+  	INSERT INTO memcomm
+  	VALUES (MEM_COMM_BNO_SEQ.NEXTVAL,MEM_COMM_MNO_SEQ.NEXTVAL, #{type}, MEM_COMM_MEMNO_SEQ.NEXTVAL, #{id}, #{memreg}, #{memcontents}, #{meming}, 0)
+  </insert>
+  <update id="updateOne">
+  	UPDATE memcomm
+  	VALUES ()
+  </update>
+  
+  
+  
+  
+  </mapper>
